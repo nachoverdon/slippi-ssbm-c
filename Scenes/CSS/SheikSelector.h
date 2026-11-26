@@ -191,14 +191,21 @@ const float HOVER_ALPHA = 0.75f;
 
 bool isInNameEntry = false;
 
-GOBJ *selectorGobj;
-JOBJ *selectorJobj;
+GOBJ *selectorGobjs[4];
+JOBJ *selectorJobjs[4];
+float selectorScales[4];
+u8 selectorCount = 0;
 
+bool IsNativeLocalTeams();
+u8 GetNativeVisibleCount();
 Vec2 GetCursorPos();
 u8 GetPlayerIndex();
 CSSData *GetCSSData();
 u8 GetSelectedChar();
 void SetSelectedChar(u8 ckind);
+void SetSelectedCharForSlot(u8 slot, u8 ckind);
+void UpdateSelectorAlphas(bool zeldaHovered, bool sheikHovered);
+void UpdateSelectorAlphasForSlot(JOBJ *jobj, u8 selectedChar, bool zeldaHovered, bool sheikHovered);
 
 void InitSheikSelector();
 void UpdateSheikSelector();

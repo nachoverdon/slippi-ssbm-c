@@ -113,6 +113,12 @@ typedef struct SlippiCSSDataTable {
   u8 teamCostumeIndex;
 } SlippiCSSDataTable;
 
+#define CSSDT_LOCAL_TEAMS_STATUS 0x1C
+#define CSSDT_NATIVE_INITIALIZED 0xA0
+#define CSSDT_NATIVE_VISIBLE_COUNT 0xA1
+#define CSSDT_CARD_NAME_TEXTS 0x1CC
+#define CSSDT_NATIVE_ORIGINAL_Z 0x1DC
+
 #pragma pack()
 
 typedef struct SlippiCSSDataTableRef {
@@ -141,13 +147,13 @@ int _internal_createSubtext(Text* text, GXColor* color, int textType, int outlin
 
 // These two functions actually both call the same function. When calling CreateSlippiPremadeText, textType MUST be 2
 Text* CreateSlippiPremadeText(int playerIndex, int messageId, int gx_pri, float x, float y, float z, float scale) {
-  _internal_createSlippiPremadeText(playerIndex, messageId, 2, gx_pri, x, y, z, scale);
+  return _internal_createSlippiPremadeText(playerIndex, messageId, 2, gx_pri, x, y, z, scale);
 }
 int CreateSubtext(Text* text, GXColor* color, bool includeOutline, int outlineColor, char** strArray, float scale, float x, float y, float innerTextY, float outlineSize) {
   if (includeOutline) {
-    _internal_createSubtext(text, color, 1, outlineColor, strArray, scale, x, y, innerTextY, outlineSize);
+    return _internal_createSubtext(text, color, 1, outlineColor, strArray, scale, x, y, innerTextY, outlineSize);
   } else {
-    _internal_createSubtext(text, color, 0, outlineColor, strArray, scale, x, y, innerTextY, outlineSize);
+    return _internal_createSubtext(text, color, 0, outlineColor, strArray, scale, x, y, innerTextY, outlineSize);
   }
 }
 
